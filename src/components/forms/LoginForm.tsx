@@ -12,8 +12,13 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { useAuth } from '@/hooks/query/authQuery/useAuth';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 const LoginForm = () => {
+	const navigate = useNavigate();
+	const { login, isAuthenticated } = useAuth();
 	const form = useForm<z.infer<typeof LoginFormSchema>>({
 		resolver: zodResolver(LoginFormSchema),
 		defaultValues: {
@@ -21,8 +26,20 @@ const LoginForm = () => {
 			password: '',
 		},
 	});
-	const onSubmit = (values: z.infer<typeof LoginFormSchema>) => {
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			console.log('User is authenticated, redirecting to home page...');
+			navigate('/home');
+		}
+	}, [isAuthenticated, navigate]);
+
+	const onSubmit = async (values: z.infer<typeof LoginFormSchema>) => {
 		console.log(values);
+		login({
+			password: values.password,
+			usernameOrEmail: values.usernameOrEmail,
+		});
 	};
 
 	const { isDirty } = form.formState;

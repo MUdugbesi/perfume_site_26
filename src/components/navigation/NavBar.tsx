@@ -1,10 +1,13 @@
-import { ShoppingCartIcon, User2Icon } from 'lucide-react';
-import { Link, useLocation } from 'react-router';
+import { LogOutIcon, ShoppingCartIcon, User2Icon } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { Nav_Links } from './NavLink';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/hooks/query/authQuery/useAuth';
 
 const NavBar = () => {
+	const navigate = useNavigate();
+	const { logout, isAuthenticated } = useAuth();
 	const { pathname } = useLocation();
 	const [, setCurrentHeight] = useState<number>(0);
 	const [isHidden, setIsHidden] = useState<boolean>(false);
@@ -23,6 +26,13 @@ const NavBar = () => {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
+	const LogoutUser = () => {
+		logout();
+		navigate('/');
+	};
+
+	console.log(isAuthenticated);
+
 	/* Disappears on scroll down and appears when user scrolls back up - floating type action navigation */
 	return (
 		<nav
@@ -31,7 +41,7 @@ const NavBar = () => {
 				{
 					'-translate-y-full': isHidden,
 					'translate-y-0 mt-5': !isHidden,
-				}
+				},
 			)}
 		>
 			{/* company name */}
@@ -55,7 +65,7 @@ const NavBar = () => {
 									'font-lato font-medium text-primary w-fit text-sm',
 									{
 										'font-bold': pathname === link.link,
-									}
+									},
 								)}
 							>
 								{link.title}
@@ -70,16 +80,26 @@ const NavBar = () => {
 									},
 									{
 										'bg-black': pathname === link.link,
-									}
+									},
 								)}
 							></div>
 						</li>
 					))}
 				</ul>
 
-				<div className='flex gap-10 ml-10'>
-					<ShoppingCartIcon className='cursor-pointer hover:text-black/60' />
-					<User2Icon className='cursor-pointer hover:text-black/60' />
+				<div className='flex gap-8 ml-10'>
+					<ShoppingCartIcon
+						className='cursor-pointer hover:text-black/60'
+						size={20}
+					/>
+					<User2Icon className='cursor-pointer hover:text-black/60' size={20} />
+					{isAuthenticated && (
+						<LogOutIcon
+							className='cursor-pointer hover:text-black/60'
+							size={20}
+							onClick={() => LogoutUser()}
+						/>
+					)}
 				</div>
 			</div>
 		</nav>

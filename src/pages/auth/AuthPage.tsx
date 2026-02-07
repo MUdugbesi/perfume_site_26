@@ -9,6 +9,7 @@ const AuthPage = () => {
 	const handleTabChange = (tab: 'login' | 'register') => {
 		setActiveTab(tab);
 	};
+
 	return (
 		<main className='flex flex-col h-screen items-center justify-center w-[60%] mx-auto'>
 			<div className='w-fit flex flex-col justify-start items-center mb-20'>
