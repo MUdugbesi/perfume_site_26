@@ -1,13 +1,11 @@
-import { LogOutIcon, ShoppingCartIcon, User2Icon } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { ShoppingCartIcon } from 'lucide-react';
+import { Link, useLocation } from 'react-router';
 import { Nav_Links } from './NavLink';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import { useAuth } from '@/hooks/query/authQuery/useAuth';
+import UserDropdownModal from '@/shared/DropdownModals/UserDropdownModal';
 
 const NavBar = () => {
-	const navigate = useNavigate();
-	const { logout, isAuthenticated } = useAuth();
 	const { pathname } = useLocation();
 	const [, setCurrentHeight] = useState<number>(0);
 	const [isHidden, setIsHidden] = useState<boolean>(false);
@@ -25,14 +23,6 @@ const NavBar = () => {
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
-
-	const LogoutUser = () => {
-		logout();
-		navigate('/');
-	};
-
-	console.log(isAuthenticated);
-
 	/* Disappears on scroll down and appears when user scrolls back up - floating type action navigation */
 	return (
 		<nav
@@ -92,14 +82,7 @@ const NavBar = () => {
 						className='cursor-pointer hover:text-black/60'
 						size={20}
 					/>
-					<User2Icon className='cursor-pointer hover:text-black/60' size={20} />
-					{isAuthenticated && (
-						<LogOutIcon
-							className='cursor-pointer hover:text-black/60'
-							size={20}
-							onClick={() => LogoutUser()}
-						/>
-					)}
+					<UserDropdownModal />
 				</div>
 			</div>
 		</nav>
