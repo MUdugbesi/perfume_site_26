@@ -12,17 +12,40 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { toast } from 'sonner';
+import credentialAuth from '@/lib/user-auth';
+import type { UserLoginAuthResponse } from '@/types';
+import { useNavigate } from 'react-router';
+import { customErrorMessage } from '@/lib/utils';
 
 const LoginForm = () => {
 	const form = useForm<z.infer<typeof LoginFormSchema>>({
 		resolver: zodResolver(LoginFormSchema),
 		defaultValues: {
-			usernameOrEmail: '',
+			emailOrUsername: '',
 			password: '',
+			rememberMe: false,
 		},
 	});
-	const onSubmit = (values: z.infer<typeof LoginFormSchema>) => {
-		console.log(values);
+	const navigate = useNavigate();
+
+	const onSubmit = async (values: z.infer<typeof LoginFormSchema>) => {
+		const { password, emailOrUsername } = values;
+		const payload = { emailOrUsername, password };
+		try {
+			const { statusCode, data } = (await credentialAuth(
+				payload,
+			)) as UserLoginAuthResponse;
+
+			if (statusCode === 200 && data !== null) {
+				toast.success('Login successful! Redirecting to home page...');
+				// navigate(getDashboardRoute(data.role));
+				navigate('/home');
+				return;
+			}
+		} catch (e) {
+			return customErrorMessage(e as Error);
+		}
 	};
 
 	const { isDirty } = form.formState;
@@ -45,7 +68,7 @@ const LoginForm = () => {
 					<div className='flex flex-col gap-4'>
 						<FormField
 							control={form.control}
-							name='usernameOrEmail'
+							name='emailOrUsername'
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Email Address or Username</FormLabel>

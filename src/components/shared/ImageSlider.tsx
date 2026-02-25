@@ -28,7 +28,7 @@ const ImageSlider = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setPresentSlide((prev) =>
-				prev === ImageSliderContainer.length - 1 ? 0 : prev + 1
+				prev === ImageSliderContainer.length - 1 ? 0 : prev + 1,
 			);
 		}, 10000);
 
@@ -37,12 +37,13 @@ const ImageSlider = () => {
 
 	return (
 		<section className='w-full relative flex items-center justify-center'>
+			<div className='border h-full w-full absolute top-0 bg-black/20'></div>
 			<img
 				src={ImageSliderContainer[presentSlide].image}
 				alt='logo_image'
 				className='h-screen w-screen object-cover'
 			/>
-			<div className='absolute w-[70%] bottom-8 mx-auto h-24 mt-5 rounded-lg bg-white/10 backdrop-blur-2xl shadow-lg shadow-black/20 border border-white/20 px-4 py-2 flex justify-between'>
+			<div className='absolute w-[70%] bottom-8 mx-auto h-24 mt-5 rounded-lg bg-white/10 backdrop-blur-2xl shadow-lg shadow-black/20 border border-white/20 px-4 py-2 flex justify-between z-20'>
 				<div className='relative w-full'>
 					{ImageSliderContainer.map((slide, index) => (
 						<div
@@ -55,11 +56,10 @@ const ImageSlider = () => {
 							<article className='font-outfit text-sm italic'>
 								{slide.text}
 							</article>
-
 							<p className='text-xs mt-1 tracking-wide flex items-end justify-end h-full'>
-								<div className='flex items-center italic'>
+								<small className='flex items-center italic'>
 									<Minus /> {slide.author}
-								</div>
+								</small>
 							</p>
 						</div>
 					))}

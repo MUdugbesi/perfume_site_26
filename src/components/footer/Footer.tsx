@@ -40,21 +40,19 @@ const Footer = () => {
 			<div className='w-[60%] mx-auto h-[30vh] flex mt-20'>
 				<div className='w-full h-full grid grid-cols-3 text-secondary'>
 					{FooterLinks.map((footer) => (
-						<>
-							<ul className='font-lato'>
-								<li className='font-extrabold mb-5'>{footer.title}</li>
-								{footer.links.map((link) => (
-									<li className='pb-2'>
-										<Link
-											to={link.link}
-											className='font-robotoCondensed text-white/45 hover:text-white'
-										>
-											{link.name}
-										</Link>
-									</li>
-								))}
-							</ul>
-						</>
+						<ul className='font-lato' key={footer.title}>
+							<li className='font-extrabold mb-5'>{footer.title}</li>
+							{footer.links.map((link) => (
+								<li className='pb-2' key={link.name}>
+									<Link
+										to={link.link}
+										className='font-robotoCondensed text-white/45 hover:text-white'
+									>
+										{link.name}
+									</Link>
+								</li>
+							))}
+						</ul>
 					))}
 				</div>
 
@@ -76,7 +74,9 @@ const Footer = () => {
 						<FaXTwitter size={22} className='text-white/45 hover:text-white' />
 						<FaLinkedin size={22} className='text-white/45 hover:text-white' />
 					</div>
-					<p className='text-white mt-5 text-sm'>&copy; 2026, All right reserved.</p>
+					<p className='text-white mt-5 text-sm'>
+						&copy; 2026, All right reserved.
+					</p>
 				</div>
 			</div>
 		</div>

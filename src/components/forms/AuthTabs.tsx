@@ -14,7 +14,7 @@ const AuthTabs = ({ activeTab, handleTabChange }: AuthTabsProps) => {
 			<div
 				className={cn(
 					'text-sm h-8 w-full rounded-md text-center flex gap-2 items-center justify-center text-white font-robotoCondensed transition-all duration-300 ease-in cursor-pointer',
-					{ 'bg-amber-500': activeTab === 'login' }
+					{ 'bg-black': activeTab === 'login' }
 				)}
 				onClick={() => handleTabChange('login')}
 			>
@@ -24,7 +24,7 @@ const AuthTabs = ({ activeTab, handleTabChange }: AuthTabsProps) => {
 			<div
 				className={cn(
 					'text-sm h-8 w-full rounded-md text-center flex gap-2 items-center justify-center text-white font-robotoCondensed transition-all duration-300 ease-in cursor-pointer',
-					{ 'bg-amber-500': activeTab === 'register' }
+					{ 'bg-black': activeTab === 'register' }
 				)}
 				onClick={() => handleTabChange('register')}
 			>

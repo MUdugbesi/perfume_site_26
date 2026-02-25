@@ -1,8 +1,9 @@
-import { ShoppingCartIcon, User2Icon } from 'lucide-react';
+import { ShoppingCartIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 import { Nav_Links } from './NavLink';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
+import UserDropdownModal from '@/shared/DropdownModals/UserDropdownModal';
 
 const NavBar = () => {
 	const { pathname } = useLocation();
@@ -22,7 +23,6 @@ const NavBar = () => {
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
-
 	/* Disappears on scroll down and appears when user scrolls back up - floating type action navigation */
 	return (
 		<nav
@@ -31,13 +31,13 @@ const NavBar = () => {
 				{
 					'-translate-y-full': isHidden,
 					'translate-y-0 mt-5': !isHidden,
-				}
+				},
 			)}
 		>
 			{/* company name */}
 			<Link
-				to={'/home'}
-				className='font-lato uppercase font-extrabold tracking-wide ml-10'
+				to={'/'}
+				className='font-lato uppercase font-extrabold tracking-wide ml-10 text-xl'
 			>
 				Perfume
 			</Link>
@@ -55,7 +55,7 @@ const NavBar = () => {
 									'font-lato font-medium text-primary w-fit text-sm',
 									{
 										'font-bold': pathname === link.link,
-									}
+									},
 								)}
 							>
 								{link.title}
@@ -70,16 +70,19 @@ const NavBar = () => {
 									},
 									{
 										'bg-black': pathname === link.link,
-									}
+									},
 								)}
 							></div>
 						</li>
 					))}
 				</ul>
 
-				<div className='flex gap-10 ml-10'>
-					<ShoppingCartIcon className='cursor-pointer hover:text-black/60' />
-					<User2Icon className='cursor-pointer hover:text-black/60' />
+				<div className='flex gap-8 ml-10'>
+					<ShoppingCartIcon
+						className='cursor-pointer hover:text-black/60'
+						size={20}
+					/>
+					<UserDropdownModal />
 				</div>
 			</div>
 		</nav>

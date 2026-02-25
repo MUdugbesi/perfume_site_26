@@ -4,8 +4,15 @@ import { MoveLeft, MoveRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import MiniCard from '../card/MiniCard';
 
-const PerfumeMiniCards = () => {
-	const [currentSlide, setCurrentSlide] = useState<number>(0);
+interface PerfumeMiniCardsProps {
+	currentSlide: number;
+	setCurrentSlide: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const PerfumeMiniCards = ({
+	currentSlide,
+	setCurrentSlide,
+}: PerfumeMiniCardsProps) => {
 	const [exitingId, setExitingId] = useState<number>(0);
 	const [nextId, setNextId] = useState<number>(1);
 	const [prevId, setPrevId] = useState<number>(0);
@@ -13,7 +20,7 @@ const PerfumeMiniCards = () => {
 	const handleNextSlide = () => {
 		setExitingId(currentSlide);
 		setCurrentSlide((prev) =>
-			prev < PerfumeMiniList.length - 1 ? prev + 1 : 0
+			prev < PerfumeMiniList.length - 1 ? prev + 1 : 0,
 		);
 		setNextId((prev) => (prev < PerfumeMiniList.length - 1 ? prev + 1 : 1));
 		setPrevId((prev) => (prev === 0 ? 0 : prev + 1));
@@ -24,7 +31,7 @@ const PerfumeMiniCards = () => {
 		setCurrentSlide((prev) => (prev > 0 ? prev - 1 : 0));
 		setPrevId((prev) => (prev > 0 ? prev - 1 : 0));
 		setNextId((prev) =>
-			prev < PerfumeMiniList.length - 1 ? prev + 1 : prev - 1
+			prev < PerfumeMiniList.length - 1 ? prev + 1 : prev - 1,
 		);
 	};
 	return (
@@ -64,7 +71,7 @@ const PerfumeMiniCards = () => {
 							'w-12 h-12 bg-black rounded-full flex items-center justify-center',
 							{
 								'bg-primary/10 text-primary/10': currentSlide === 0,
-							}
+							},
 						)}
 					>
 						<MoveLeft
@@ -80,7 +87,7 @@ const PerfumeMiniCards = () => {
 							{
 								'bg-primary/10 text-primary/10':
 									currentSlide === PerfumeMiniList.length - 1,
-							}
+							},
 						)}
 					>
 						<MoveRight
