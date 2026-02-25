@@ -36,8 +36,8 @@ const NavBar = () => {
 		>
 			{/* company name */}
 			<Link
-				to={'/home'}
-				className='font-lato uppercase font-extrabold tracking-wide ml-10'
+				to={'/'}
+				className='font-lato uppercase font-extrabold tracking-wide ml-10 text-xl'
 			>
 				Perfume
 			</Link>

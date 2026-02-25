@@ -18,6 +18,11 @@ export const RegisterFormSchema = z.object({
 		.string()
 		.min(1, { message: 'Last name required' })
 		.min(3, { message: 'Last name should be at least three characters' }),
+	companyName: z
+		.string()
+		.min(1, { message: 'Last name required' })
+		.min(3, { message: 'Last name should be at least three characters' })
+		.optional(),
 	tel: z.string(),
 	email: z.email().min(1, { message: 'Email address is required' }),
 	password: z

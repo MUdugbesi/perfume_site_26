@@ -44,7 +44,7 @@ const LoginForm = () => {
 				return;
 			}
 		} catch (e) {
-			customErrorMessage(e as Error);
+			return customErrorMessage(e as Error);
 		}
 	};
 

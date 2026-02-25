@@ -21,22 +21,31 @@ const RegisterForm = () => {
 			fName: '',
 			lName: '',
 			email: '',
+			role: 'buyer',
+			companyName: undefined,
 			password: '',
 			confirmPassword: '',
 			tel: '',
-			role: '',
 		},
 	});
+
 	const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
-		const { fName, lName, email, password, role, tel } = values;
-		const payload = { fName, lName, email, password, role, tel };
+		const { fName, lName, email, password, role, tel, companyName } = values;
+		const payload = { fName, lName, email, password, role, tel, companyName };
 		const result = await authServices.register(payload);
 
 		console.log(result);
 		return result;
 	};
 
+	const handleRoleChange = () => {
+		const currentRole = form.getValues('role');
+		const newRole = currentRole === 'buyer' ? 'seller' : 'buyer';
+		form.setValue('role', newRole);
+	};
+
 	const { isDirty } = form.formState;
+	const role = form.watch('role');
 
 	return (
 		<Form {...form}>
@@ -44,13 +53,28 @@ const RegisterForm = () => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='w-[80%] mx-auto flex flex-col items-center justify-center overflow-hidden z-10'
 			>
+				<div>
+					<p className='text-center italic font-robotoCondensed text-xs mt-5'>
+						{role.toLocaleLowerCase() !== 'buyer'
+							? 'Are you a buyer? '
+							: 'Are you a product owner? '}
+						{''}
+						<small
+							className='italics text-blue-600 font-bold cursor-pointer hover:underline'
+							onClick={() => handleRoleChange()}
+						>
+							Click here!
+						</small>
+					</p>
+				</div>
 				<div className='mb-4'>
-					<h3 className='text-center mt-10 text-3xl uppercase font-bold font-robotoCondensed'>
+					<h3 className='text-center mt-5 text-3xl uppercase font-bold font-robotoCondensed'>
 						Create an account
 					</h3>
 					<p className='font-robotoCondensed mt-1 text-center italic text-sm'>
-						Engage and navigate through our perfume collections, own an account
-						to navigate this.
+						{role.toLocaleLowerCase() === 'buyer'
+							? 'Engage and navigate through our perfume collections, own an account today.'
+							: 'Join us and start selling your products to the world.'}
 					</p>
 				</div>
 				<div className='flex flex-col gap-4'>
@@ -107,6 +131,26 @@ const RegisterForm = () => {
 							</FormItem>
 						)}
 					/>
+
+					{form.watch('role') === 'seller' && (
+						<FormField
+							control={form.control}
+							name='companyName'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Company Name</FormLabel>
+									<FormControl>
+										<Input
+											placeholder='Company Name'
+											{...field}
+											className='font-poppins'
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					)}
 					<FormField
 						control={form.control}
 						name='tel'
@@ -167,7 +211,8 @@ const RegisterForm = () => {
 										<Input
 											placeholder='Role'
 											{...field}
-											className='font-poppins'
+											className='font-poppins capitalize'
+											readOnly
 										/>
 									</FormControl>
 								</div>

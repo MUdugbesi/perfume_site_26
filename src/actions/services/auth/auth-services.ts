@@ -1,11 +1,11 @@
 import { BaseService } from '@/actions/api/base-service';
+import type { UserLoginAuthResponse } from '@/types';
 import type {
 	newUserRegistrationDto,
 	newUserRegistrationResponseDto,
 	User,
 	UserLoginAuthDetails,
-} from '.';
-import type { UserLoginAuthResponse } from '@/types';
+} from '../types';
 
 class AuthService extends BaseService {
 	constructor() {

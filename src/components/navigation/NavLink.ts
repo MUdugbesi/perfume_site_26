@@ -1,5 +1,5 @@
 export const Nav_Links = [
-	{ title: 'Home', link: '/home' },
+	{ title: 'Home', link: '/' },
 	{ title: 'Women', link: '/women' },
 	{ title: 'Men', link: '/men' },
 	{ title: 'About', link: '/about' },

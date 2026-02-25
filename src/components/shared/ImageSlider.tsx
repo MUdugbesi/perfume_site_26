@@ -28,7 +28,7 @@ const ImageSlider = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setPresentSlide((prev) =>
-				prev === ImageSliderContainer.length - 1 ? 0 : prev + 1
+				prev === ImageSliderContainer.length - 1 ? 0 : prev + 1,
 			);
 		}, 10000);
 
@@ -56,11 +56,10 @@ const ImageSlider = () => {
 							<article className='font-outfit text-sm italic'>
 								{slide.text}
 							</article>
-
 							<p className='text-xs mt-1 tracking-wide flex items-end justify-end h-full'>
-								<div className='flex items-center italic'>
+								<small className='flex items-center italic'>
 									<Minus /> {slide.author}
-								</div>
+								</small>
 							</p>
 						</div>
 					))}

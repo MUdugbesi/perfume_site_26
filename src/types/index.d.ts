@@ -19,3 +19,27 @@ export interface ErrorResponse {
 	message: string;
 	success: boolean;
 }
+
+//perfume related types
+
+export interface Perfume {
+	id: string;
+	perfumeName: string;
+	perfumeQty: number;
+	perfumeCost: number;
+	perfumeDescription: string;
+	perfumeImage: string;
+	isFeatured: boolean;
+	perfumeTags: string[];
+	perfumeIngredients: string[];
+	perfumeReviews: PerfumeReviewDetails[];
+	createdAt: string;
+}
+
+export interface PerfumeReviewDetails {
+	reviewId: string;
+	userId: string;
+	rating: number;
+	text: string;
+	createdAt: string;
+}

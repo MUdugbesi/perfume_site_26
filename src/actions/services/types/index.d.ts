@@ -29,3 +29,22 @@ export interface User {
 	email: string;
 	role: string;
 }
+
+// perfume related types
+export interface AddPerfumeReviewDetails {
+	text: string;
+	rating: number;
+}
+
+export interface PerfumeReviewWithUserDetails {
+	reviewId: string;
+	text: string;
+	rating: number;
+	userId: string;
+	createdBy: {
+		fName: string;
+		lName: string;
+		email: string;
+		profileImage?: string;
+	};
+}

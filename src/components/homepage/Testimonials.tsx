@@ -18,7 +18,7 @@ const Testimonials = () => {
 							review={review}
 							key={index}
 						/>
-					)
+					),
 				)}
 			</div>
 		</div>

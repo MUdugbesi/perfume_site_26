@@ -1,10 +1,10 @@
-import authServices from '@/actions/services/auth/auth-services';
 import { getToken, removeToken } from '@/lib/user-auth';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { AuthStatus } from '..';
+import { RequestStatus } from '..';
 import { useNavigate } from 'react-router';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
+import authServices from '@/actions/services/auth/auth-services';
 
 export function useAuth() {
 	const token = getToken();
@@ -20,9 +20,9 @@ export function useAuth() {
 		enabled: !!token,
 	});
 
-	if (!token) return { user: null, status: AuthStatus.error };
+	if (!token) return { user: null, status: RequestStatus.error };
 
-	return { user, status: AuthStatus[status], refetchAuth: refetch };
+	return { user, status: RequestStatus[status], refetchAuth: refetch };
 }
 
 export function useLogout() {
