@@ -1,7 +1,5 @@
 import { Minus } from 'lucide-react';
-import logoImage from '@/assets/login/login.png';
-import perfume1 from '@/assets/perfume1.jpg';
-import perfume2 from '@/assets/perfume2.jpg';
+import logoImage from '@/assets/gradients/gradient1.png';
 import { useEffect, useState } from 'react';
 
 const ImageSlider = () => {
@@ -11,16 +9,16 @@ const ImageSlider = () => {
 			text: 'This is a first text about perfume',
 			author: 'Marvelous Udugbesi',
 		},
-		{
-			image: perfume1,
-			text: 'This is a second text about perfume',
-			author: 'Ayorinde Henry',
-		},
-		{
-			image: perfume2,
-			text: 'This is a third text about perfume',
-			author: 'Kehinde Raph',
-		},
+
+		// 	image: perfume1,
+		// 	text: 'This is a second text about perfume',
+		// 	author: 'Ayorinde Henry',
+		// },
+		// {
+		// 	image: perfume2,
+		// 	text: 'This is a third text about perfume',
+		// 	author: 'Kehinde Raph',
+		// },
 	];
 
 	const [presentSlide, setPresentSlide] = useState<number>(0);

@@ -4,6 +4,7 @@ import ReviewMiniCards from '../miscellaneous/ReviewMiniCards';
 import { useGetFeaturedPerfumes } from '@/hooks/query/perfumeQuery';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/query/authQuery/useAuth';
+import type { Perfume } from '@/types';
 
 const Hero = () => {
 	const { user } = useAuth();
@@ -65,6 +66,7 @@ const Hero = () => {
 				<PerfumeMiniCards
 					currentSlide={currentSlide}
 					setCurrentSlide={setCurrentSlide}
+					featuredPerfumes={featuredPerfumes as Perfume[]}
 				/>
 			</section>
 
