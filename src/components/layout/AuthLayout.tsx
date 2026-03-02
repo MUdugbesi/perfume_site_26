@@ -3,7 +3,7 @@ import ImageSlider from '../shared/ImageSlider';
 
 const AuthLayout = () => {
 	return (
-		<main className='grid grid-cols-2 w-screen h-screen overflow-hidden'>
+		<main className='w-screen h-screen  overflow-hidden relative flex items-center justify-center bg-black/20'>
 			<Outlet />
 			<ImageSlider />
 		</main>

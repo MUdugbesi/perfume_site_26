@@ -10,11 +10,11 @@ interface AuthTabsProps {
 
 const AuthTabs = ({ activeTab, handleTabChange }: AuthTabsProps) => {
 	return (
-		<div className='h-9 w-[45%] bg-black/10 mx-auto rounded-md grid grid-cols-2 items-center px-0.5 gap-0.5 z-40 shadow-xs shadow-black/40'>
+		<div className='h-9 w-[25%] bg-black/10 mx-auto rounded-md grid grid-cols-2 items-center px-0.5 gap-0.5 z-40 shadow-xs shadow-black/40'>
 			<div
 				className={cn(
 					'text-sm h-8 w-full rounded-md text-center flex gap-2 items-center justify-center text-white font-robotoCondensed transition-all duration-300 ease-in cursor-pointer',
-					{ 'bg-black': activeTab === 'login' }
+					{ 'bg-orange-400 font-semibold': activeTab === 'login' },
 				)}
 				onClick={() => handleTabChange('login')}
 			>
@@ -24,7 +24,7 @@ const AuthTabs = ({ activeTab, handleTabChange }: AuthTabsProps) => {
 			<div
 				className={cn(
 					'text-sm h-8 w-full rounded-md text-center flex gap-2 items-center justify-center text-white font-robotoCondensed transition-all duration-300 ease-in cursor-pointer',
-					{ 'bg-black': activeTab === 'register' }
+					{ 'bg-orange-400 font-semibold': activeTab === 'register' },
 				)}
 				onClick={() => handleTabChange('register')}
 			>

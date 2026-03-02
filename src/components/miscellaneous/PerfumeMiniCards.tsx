@@ -3,15 +3,18 @@ import { PerfumeMiniList } from '../homepage/DataList';
 import { MoveLeft, MoveRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import MiniCard from '../card/MiniCard';
+import type { Perfume } from '@/types';
 
 interface PerfumeMiniCardsProps {
 	currentSlide: number;
 	setCurrentSlide: React.Dispatch<React.SetStateAction<number>>;
+	featuredPerfumes: Perfume[] | null;
 }
 
 const PerfumeMiniCards = ({
 	currentSlide,
 	setCurrentSlide,
+	featuredPerfumes,
 }: PerfumeMiniCardsProps) => {
 	const [exitingId, setExitingId] = useState<number>(0);
 	const [nextId, setNextId] = useState<number>(1);
@@ -37,20 +40,32 @@ const PerfumeMiniCards = ({
 	return (
 		<>
 			<div className='flex relative mt-24 h-[15vh]'>
-				{PerfumeMiniList.map(({ name, image, price, description, id }) => (
-					<MiniCard
-						name={name}
-						image={image}
-						price={price}
-						description={description}
-						currentSlide={currentSlide}
-						id={id}
-						exitingId={exitingId}
-						nextId={nextId}
-						prevId={prevId}
-						key={id}
-					/>
-				))}
+				{featuredPerfumes &&
+					featuredPerfumes.map(
+						(
+							{
+								perfumeName,
+								perfumeImage,
+								perfumeCost,
+								perfumeDescription,
+								id,
+							},
+							index,
+						) => (
+							<MiniCard
+								name={perfumeName}
+								image={perfumeImage}
+								price={perfumeCost}
+								description={perfumeDescription}
+								currentSlide={currentSlide}
+								id={index}
+								exitingId={exitingId}
+								nextId={nextId}
+								prevId={prevId}
+								key={id}
+							/>
+						),
+					)}
 			</div>
 
 			<div className='relative flex gap-10 items-center'>

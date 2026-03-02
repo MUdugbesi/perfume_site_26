@@ -2,6 +2,7 @@ import { useState } from 'react';
 import LoginForm from '@/components/forms/LoginForm';
 import RegisterForm from '@/components/forms/RegisterForm';
 import AuthTabs from '@/components/forms/AuthTabs';
+import { cn } from '@/lib/utils';
 
 const AuthPage = () => {
 	const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
@@ -19,7 +20,12 @@ const AuthPage = () => {
 				</p> */}
 			</div>
 			<AuthTabs activeTab={activeTab} handleTabChange={handleTabChange} />
-			<div className='min-h-[50vh] w-full'>
+			<div
+				className={cn(
+					'min-h-[45vh] w-[40vw] mt-6 p-6 z-10 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl shadow-black/30',
+					{ 'pb-20': activeTab !== 'login' },
+				)}
+			>
 				{activeTab === 'login' ? <LoginForm /> : <RegisterForm />}
 			</div>
 		</main>

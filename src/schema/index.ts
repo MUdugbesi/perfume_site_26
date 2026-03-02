@@ -9,6 +9,38 @@ export const LoginFormSchema = z.object({
 	rememberMe: z.boolean().optional(),
 });
 
+export const PasswordResetSchema = z.object({
+	email: z.email().min(1, { message: 'Email address is required' }),
+});
+
+export const OtpSchema = z.object({
+	otp: z.array(
+		z
+			.string()
+			.min(1, { message: 'OTP is required' })
+			.length(6, { message: 'OTP must be 6 digits' }),
+	),
+});
+
+export const NewPasswordSchema = z.object({
+	password: z
+		.string()
+		.min(1, { message: 'Password is required' })
+		.min(8, { message: 'Invalid password' })
+		.regex(
+			new RegExp(
+				'^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#@$!%*?&])[A-Za-z\\d#$%@!%*?&]{8,}$',
+			),
+			{
+				message:
+					'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character[@$#!%*?&].',
+			},
+		),
+	confirmPassword: z.string().min(1, { message: 'Please confirm password' }),
+});
+
+export const DashboardRouteSchema = z.enum(['admin', 'customer']);
+
 export const RegisterFormSchema = z.object({
 	fName: z
 		.string()
