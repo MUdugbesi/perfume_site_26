@@ -6,6 +6,8 @@ import { HomePage } from './pages';
 import { Toaster as Sonner } from 'sonner';
 import { AuthRoute, ProtectedRoute } from './shared/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import PasswordReset from './components/modals/PasswordReset';
+import ResetPassword from './components/forms/ResetPassword';
 
 const AuthPage = lazy(() => import('@/pages/auth/AuthPage'));
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => {
 						<Route element={<AuthLayout />}>
 							<Route element={<AuthRoute />}>
 								<Route path='/auth' element={<AuthPage />} />
+								<Route path='/forgot-password' element={<PasswordReset />} />
+								<Route path='/reset-password' element={<ResetPassword />} />
 							</Route>
 						</Route>
 						<Route element={<RootLayout />}>

@@ -63,11 +63,13 @@ const Hero = () => {
 					)
 				)}
 
-				<PerfumeMiniCards
-					currentSlide={currentSlide}
-					setCurrentSlide={setCurrentSlide}
-					featuredPerfumes={featuredPerfumes as Perfume[]}
-				/>
+				{featuredPerfumes && (
+					<PerfumeMiniCards
+						currentSlide={currentSlide}
+						setCurrentSlide={setCurrentSlide}
+						featuredPerfumes={featuredPerfumes as Perfume[]}
+					/>
+				)}
 			</section>
 
 			<section className='relative mt-20 flex justify-center'>

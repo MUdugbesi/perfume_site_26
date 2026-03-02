@@ -15,7 +15,7 @@ import { Button } from '../ui/button';
 import { toast } from 'sonner';
 import credentialAuth from '@/lib/user-auth';
 import type { UserLoginAuthResponse } from '@/types';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { customErrorMessage } from '@/lib/utils';
 
 const LoginForm = () => {
@@ -54,60 +54,64 @@ const LoginForm = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='mx-auto flex items-center justify-center overflow-hidden z-10 w-[80%]'
+				className='mx-auto flex items-center justify-center overflow-hidden z-10 w-[60%]'
 			>
-				<section className='w-full z-40'>
-					<div className='mb-4'>
-						<h3 className='text-center mt-10 text-3xl uppercase font-bold font-robotoCondensed'>
-							Welcome
-						</h3>
-						<p className='font-robotoCondensed mt-1 text-center'>
-							Please enter your login details
-						</p>
-					</div>
-					<div className='flex flex-col gap-4'>
-						<FormField
-							control={form.control}
-							name='emailOrUsername'
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Email Address or Username</FormLabel>
-									<FormControl>
-										<Input
-											placeholder='Email or Username'
-											{...field}
-											className='font-poppins'
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name='password'
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Password</FormLabel>
-									<FormControl>
-										<Input
-											placeholder='Password'
-											type='password'
-											{...field}
-											className='font-poppins'
-										/>
-									</FormControl>
+				{/* <section className='w-full z-40'> */}
+				<div className='w-full flex flex-col gap-4'>
+					<h3 className='text-4xl font-bold uppercase text-center mb-8 font-robotoCondensed'>Login</h3>
+					<FormField
+						control={form.control}
+						name='emailOrUsername'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Email Address or Username</FormLabel>
+								<FormControl>
+									<Input
+										placeholder='Email or Username'
+										{...field}
+										className='font-poppins'
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name='password'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Password</FormLabel>
+								<FormControl>
+									<Input
+										placeholder='Password'
+										type='password'
+										{...field}
+										className='font-poppins'
+									/>
+								</FormControl>
 
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 
-						<Button size={'lg'} className='bg-primary ' disabled={!isDirty}>
-							Login
-						</Button>
-					</div>
-				</section>
+					<Link
+						to='/forgot-password'
+						className='text-sm text-primary font-robotoCondensed w-full justify-end flex hover:underline hover:text-red-500 transition duration-200'
+					>
+						Forgot Password?
+					</Link>
+
+					<Button
+						size={'lg'}
+						className='bg-orange-400 hover:bg-orange-500/60 active:bg-orange-500'
+						disabled={!isDirty}
+					>
+						Login
+					</Button>
+				</div>
+				{/* </section> */}
 			</form>
 		</Form>
 	);

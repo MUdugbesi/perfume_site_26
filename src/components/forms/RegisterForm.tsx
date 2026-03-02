@@ -51,7 +51,7 @@ const RegisterForm = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='w-[80%] mx-auto flex flex-col items-center justify-center overflow-hidden z-10'
+				className='w-[60%] mx-auto flex flex-col items-center justify-center overflow-hidden z-10 '
 			>
 				<div>
 					<p className='text-center italic font-robotoCondensed text-xs mt-5'>
@@ -131,7 +131,6 @@ const RegisterForm = () => {
 							</FormItem>
 						)}
 					/>
-
 					{form.watch('role') === 'seller' && (
 						<FormField
 							control={form.control}
@@ -199,7 +198,6 @@ const RegisterForm = () => {
 							</FormItem>
 						)}
 					/>
-
 					<FormField
 						control={form.control}
 						name='role'
@@ -219,8 +217,12 @@ const RegisterForm = () => {
 							</FormItem>
 						)}
 					/>
-
-					<Button variant={'default'} size={'lg'} disabled={!isDirty}>
+					<Button
+						variant={'default'}
+						size={'lg'}
+						disabled={!isDirty}
+						className='bg-orange-400 hover:bg-orange-500/60 active:bg-orange-500'
+					>
 						Register
 					</Button>
 				</div>
